@@ -17,13 +17,6 @@ public class AIScript : MonoBehaviour
     private bool patrolling = true;
     public float range = 3.0f;
 
-    private bool isRotatingLeft = false;
-    private bool isRotatingRight = false;
-    private bool isWalking = false;
-    private bool isWandering = false;
-    public float rotationSpeed;
-    public float movementSpeed;
-
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -66,21 +59,6 @@ public class AIScript : MonoBehaviour
             {
                 patrolling = false;
                 StartCoroutine(patrol());
-
-                if (isRotatingRight == true)
-                {
-                    transform.Rotate(transform.up * Time.deltaTime * rotationSpeed * 50.0f);
-                }
-
-                if (isRotatingLeft == true)
-                {
-                    transform.Rotate(transform.up * Time.deltaTime * -rotationSpeed * 50.0f);
-                }
-
-                if (isWalking == true)
-                {
-                    gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * movementSpeed * 25.0f);
-                }
             } 
         }
 
@@ -142,38 +120,9 @@ public class AIScript : MonoBehaviour
 
     IEnumerator patrol()
     {
-        int RotationTime = Random.Range(1, 4);
-        int RotateWait = Random.Range(1, 4);
-        int RotateDirection = Random.Range(1, 2);
-        int WalkWait = Random.Range(1, 5);
-        int WalkTime = Random.Range(1, 4);
-
-        isWandering = true;
-
-        yield return new WaitForSeconds(WalkWait);
-
-        isWalking = true;
-
-        yield return new WaitForSeconds(WalkTime);
-
-        isWalking = false;
-
-        yield return new WaitForSeconds(RotateWait);
-
-        if (RotateDirection == 1)
-        {
-            isRotatingLeft = true;
-            yield return new WaitForSeconds(RotationTime);
-            isRotatingLeft = false;
-        }
-
-        if (RotateDirection == 2)
-        {
-            isRotatingRight = true;
-            yield return new WaitForSeconds(RotationTime);
-            isRotatingRight = false;
-        }
-
-        isWandering = false;
+        body.velocity = RandomVector(-5f, 5f);
+        yield return new WaitForSeconds(2.5f);
+        patrolling = true;
+        yield return null;
     }
 }
