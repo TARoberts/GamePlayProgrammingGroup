@@ -16,7 +16,15 @@ public class player_combat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))
+        if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Armed-Attack-1"))
+        {
+            iFrame = true;
+        }
+        else if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Unarmed-Attack-1"))
+        {
+            iFrame = true;
+        }
+        else if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Moving Attack"))
         {
             iFrame = true;
         }
@@ -24,13 +32,13 @@ public class player_combat : MonoBehaviour
         {
             iFrame = false;
         }
-        if (HP <= 0)
-        {
-            playerAnimator.SetBool("Dead", true);
-            player.enabled = false;
+        //if (HP <= 0)
+        //{
+          //  playerAnimator.SetBool("Dead", true);
+            //player.enabled = false;
             
-            StartCoroutine(respawn());
-        }
+            //StartCoroutine(respawn());
+        //}
     }
 
     IEnumerator respawn()

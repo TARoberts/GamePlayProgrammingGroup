@@ -28,7 +28,7 @@ public class AIScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (combat.HP == 0)
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<EricCharacterMovement>().PlayerHP == 0)
         {
             distance = 2000;
         }
@@ -112,7 +112,7 @@ public class AIScript : MonoBehaviour
         if (combat.iFrame == false)
         {
             body.AddForce(toOther.normalized * -2.0f, ForceMode.Impulse);
-            combat.HP = combat.HP - 1;
+            GameObject.FindGameObjectWithTag("Player").GetComponent<EricCharacterMovement>().PlayerHP = GameObject.FindGameObjectWithTag("Player").GetComponent<EricCharacterMovement>().PlayerHP - 1;
         }
         yield return new WaitForSeconds(2.0f);
         canAttack = true;

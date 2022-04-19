@@ -81,7 +81,7 @@ public class AI_Combat : MonoBehaviour
             float distance = Vector3.Distance(player.transform.position, transform.position);
             if (distance < range)
             {
-                if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))
+                if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Armed-Attack-1"))
                 {
                     particle.Play();
                     toOther.y = 0;
@@ -89,7 +89,24 @@ public class AI_Combat : MonoBehaviour
                     hitStun = true;
                     StartCoroutine(attack());
                 }
-                
+
+                if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Unarmed-Attack-1"))
+                {
+                    particle.Play();
+                    toOther.y = 0;
+                    body.AddForce(toOther.normalized * -5.0f, ForceMode.Impulse);
+                    hitStun = true;
+                    StartCoroutine(attack());
+                }
+
+                if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Moving Attack"))
+                {
+                    particle.Play();
+                    toOther.y = 0;
+                    body.AddForce(toOther.normalized * -5.0f, ForceMode.Impulse);
+                    hitStun = true;
+                    StartCoroutine(attack());
+                }
             }
         }
     }
