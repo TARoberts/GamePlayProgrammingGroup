@@ -9,6 +9,7 @@ namespace BezierSolution
 	{
 		public BezierSpline spline;
 		public TravelMode travelMode;
+        public GameObject player;
 
 		public float travelTime = 5f;
 		[SerializeField]
@@ -25,7 +26,23 @@ namespace BezierSolution
 			set { m_normalizedT = value; }
 		}
 
-		public float movementLerpModifier = 10f;
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (this.gameObject.layer.Equals("Player"))
+            {
+                collision.collider.transform.SetParent(transform);
+            }
+        }
+
+        private void OnCollisionExit(Collision collision)
+        {
+            if (this.gameObject.layer.Equals("Player"))
+            {
+                collision.collider.transform.SetParent(null);
+            }
+        }
+
+        public float movementLerpModifier = 10f;
 		public float rotationLerpModifier = 10f;
 
 		public LookAtMode lookAt = LookAtMode.Forward;

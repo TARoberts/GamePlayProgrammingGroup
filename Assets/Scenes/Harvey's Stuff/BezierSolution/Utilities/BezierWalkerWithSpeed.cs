@@ -23,8 +23,10 @@ namespace BezierSolution
 			set { m_normalizedT = value; }
 		}
 
-		//public float movementLerpModifier = 10f;
-		public float rotationLerpModifier = 10f;
+
+
+        //public float movementLerpModifier = 10f;
+        public float rotationLerpModifier = 10f;
 
 		public LookAtMode lookAt = LookAtMode.Forward;
 
