@@ -10,6 +10,7 @@ TagManager:
   - JumpBoost
   - Enemy
   - Weapon
+  - Enemy Target
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - Walkable
   - 
   - 
-  - 
+  - Player
   - 
   - 
   - 
