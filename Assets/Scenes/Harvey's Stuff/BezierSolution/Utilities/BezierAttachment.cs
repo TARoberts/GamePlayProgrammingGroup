@@ -220,13 +220,13 @@ namespace BezierSolution
 
         private void Update()
         {
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S))
             {
-                m_normalizedT -= 0.0005f;
+                m_normalizedT -= 0.0002f;
             }
-            else if (Input.GetKey(KeyCode.D))
+            else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W))
             {
-                m_normalizedT += 0.0005f;
+                m_normalizedT += 0.0002f;
             }
         }
 
