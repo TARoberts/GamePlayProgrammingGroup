@@ -17,11 +17,11 @@ public class EricCharacterMovement : MonoBehaviour
     private Hashing hash;
 
     public bool armed = false;
-    private bool canDoubleJump = false;
+    public bool canDoubleJump = false;
     private bool groundedPlayer;
 
-    public float playerSpeed = 2.0f;
-    public float jumpHeight = 2.0f;
+    public float playerSpeed = 4.0f;
+    public float jumpHeight = 4.0f;
     public float turnSmoothTime = 0.1f;
     public float speedDampTime = 0.01f;
     public float jumpForce;
@@ -158,21 +158,6 @@ public class EricCharacterMovement : MonoBehaviour
         {
             anim?.SetBool(hash.deathBool, true);
             StartCoroutine(Respawn());
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "SpeedBoost")
-        {
-            speedParticle.SetActive(true);
-            playerSpeed = 12.0f;
-        }
-
-        if (other.tag == "DoubleJump")
-        {
-            jumpParticle.SetActive(true);
-            canDoubleJump = true;
         }
     }
 
