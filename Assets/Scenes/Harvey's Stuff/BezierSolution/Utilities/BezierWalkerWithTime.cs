@@ -9,9 +9,8 @@ namespace BezierSolution
 	{
 		public BezierSpline spline;
 		public TravelMode travelMode;
-        public GameObject player;
 
-		public float travelTime = 5f;
+        public float travelTime = 5f;
 		[SerializeField]
 		[Range( 0f, 1f )]
 		private float m_normalizedT = 0f;
@@ -20,27 +19,29 @@ namespace BezierSolution
 
 		public override BezierSpline Spline { get { return spline; } }
 
-		public override float NormalizedT
+        public GameObject Player;
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject == Player)
+            {
+                Player.transform.parent = transform;
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.gameObject == Player)
+            {
+                Player.transform.parent = null;
+            }
+        }
+
+        public override float NormalizedT
 		{
 			get { return m_normalizedT; }
 			set { m_normalizedT = value; }
 		}
-
-        private void OnCollisionEnter(Collision collision)
-        {
-            if (this.gameObject.layer.Equals("Player"))
-            {
-                collision.collider.transform.SetParent(transform);
-            }
-        }
-
-        private void OnCollisionExit(Collision collision)
-        {
-            if (this.gameObject.layer.Equals("Player"))
-            {
-                collision.collider.transform.SetParent(null);
-            }
-        }
 
         public float movementLerpModifier = 10f;
 		public float rotationLerpModifier = 10f;
