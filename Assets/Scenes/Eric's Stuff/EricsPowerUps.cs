@@ -4,33 +4,74 @@ using UnityEngine;
 
 public class EricsPowerUps : MonoBehaviour
 {
-    public bool SpeedBoost;
-    public bool DoubleJump;
-    public bool Active;
-    public bool OneTimeUse;
-    public int RespawnTimer;
-    public Material SpeedBoostMaterial;
-    public Material DoubleJumpMaterial;
+    public bool PowerUpActive = false;
+    public bool DestroyPowerUp = false;
+    public bool SpeedBoost = false;
+    public bool DoubleJump = false;
+    public bool HealthPowerUp = false;
+    public Material SpeedMaterial;
+    public Material JumpMaterial;
+    public Material HealthMaterial;
+    public bool OneTimeUse = false;
+    public int RespawnTimer = 0;
 
-    void Update()
+    private void Start()
     {
         if (SpeedBoost)
         {
-            gameObject.GetComponent<MeshRenderer>().material = SpeedBoostMaterial;
+            gameObject.GetComponent<MeshRenderer>().material = SpeedMaterial;
         }
         else if (DoubleJump)
         {
-            gameObject.GetComponent<MeshRenderer>().material = DoubleJumpMaterial;
+            gameObject.GetComponent<MeshRenderer>().material = JumpMaterial;
+        }
+        else if (HealthPowerUp)
+        {
+            gameObject.GetComponent<MeshRenderer>().material = HealthMaterial;
+        }
+    }
+
+
+    void LateUpdate()
+    {
+        if (DestroyPowerUp == false)
+        {
+            gameObject.GetComponent<MeshRenderer>().enabled = true;
+            gameObject.GetComponent<SphereCollider>().enabled = true;
+            if (SpeedBoost && PowerUpActive)
+            {
+                gameObject.GetComponent<MeshRenderer>().material = SpeedMaterial;
+                GameObject.FindGameObjectWithTag("Player").GetComponent<EricCharacterMovement>().playerSpeed = 12.0f;
+                GameObject.FindGameObjectWithTag("Player").GetComponent<EricCharacterMovement>().speedParticle.SetActive(true);
+                StartCoroutine(PowerUpDuration(RespawnTimer));
+            }
+
+            else if (DoubleJump && PowerUpActive)
+            {
+                GameObject.FindGameObjectWithTag("Player").GetComponent<EricCharacterMovement>().canDoubleJump = true;
+                GameObject.FindGameObjectWithTag("Player").GetComponent<EricCharacterMovement>().jumpParticle.SetActive(true);
+                StartCoroutine(PowerUpDuration(RespawnTimer));
+            }
+
+            else if (HealthPowerUp && PowerUpActive)
+            {
+                GameObject.FindGameObjectWithTag("Player").GetComponent<EricCharacterMovement>().PlayerHP = GameObject.FindGameObjectWithTag("Player").GetComponent<EricCharacterMovement>().PlayerHP + 5;
+                GameObject.FindGameObjectWithTag("Player").GetComponent<EricCharacterMovement>().HealingParticle.SetActive(true);
+                StartCoroutine(PowerUpDuration(RespawnTimer));
+            }
         }
 
-        if (SpeedBoost && Active)
+        if (SpeedBoost)
         {
-            StartCoroutine(SpeedBoostRoutine(RespawnTimer));
+            gameObject.GetComponent<MeshRenderer>().material = SpeedMaterial;
         }
-
-        if (DoubleJump && Active)
+        else if (DoubleJump)
         {
-            StartCoroutine(DoubleJumpRoutine(RespawnTimer));
+            gameObject.GetComponent<MeshRenderer>().material = JumpMaterial;
+        }
+        else if (HealthPowerUp)
+        {
+            gameObject.GetComponent<MeshRenderer>().material = HealthMaterial;
         }
     }
 
@@ -38,8 +79,7 @@ public class EricsPowerUps : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log("Collided with PowerUp");
-            Active = true;
+            PowerUpActive = true;
         }
     }
 
@@ -47,8 +87,7 @@ public class EricsPowerUps : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log("Collided with PowerUp");
-            Active = true;
+            PowerUpActive = true;
         }
     }
 
@@ -56,50 +95,39 @@ public class EricsPowerUps : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log("Collided with PowerUp");
-            Active = true;
+            PowerUpActive = true;
         }
     }
 
-    IEnumerator SpeedBoostRoutine(int seconds)
+    IEnumerator PowerUpDuration(int seconds)
     {
+        DestroyPowerUp = true;
         gameObject.GetComponent<MeshRenderer>().enabled = false;
         gameObject.GetComponent<SphereCollider>().enabled = false;
-        GameObject.FindGameObjectWithTag("Player").GetComponent<EricCharacterMovement>().playerSpeed = 12.0f;
-        GameObject.FindGameObjectWithTag("Player").GetComponent<EricCharacterMovement>().speedParticle.SetActive(true);
-
         yield return new WaitForSeconds(seconds);
+
+        PowerUpActive = false;
+        DestroyPowerUp = false;
 
         if (OneTimeUse)
         {
             Destroy(gameObject);
         }
 
-        gameObject.GetComponent<MeshRenderer>().enabled = true;
-        gameObject.GetComponent<SphereCollider>().enabled = true;
-        GameObject.FindGameObjectWithTag("Player").GetComponent<EricCharacterMovement>().playerSpeed = 4.0f;
-        GameObject.FindGameObjectWithTag("Player").GetComponent<EricCharacterMovement>().speedParticle.SetActive(false);
-        Active = false;
-    }
-
-    IEnumerator DoubleJumpRoutine(int seconds)
-    {
-        gameObject.GetComponent<MeshRenderer>().enabled = false;
-        gameObject.GetComponent<SphereCollider>().enabled = false;
-        GameObject.FindGameObjectWithTag("Player").GetComponent<EricCharacterMovement>().canDoubleJump = true;
-        GameObject.FindGameObjectWithTag("Player").GetComponent<EricCharacterMovement>().jumpParticle.SetActive(true);
-
-        yield return new WaitForSeconds(seconds);
-
-        if (OneTimeUse)
+        if (DoubleJump)
         {
-            Destroy(gameObject);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<EricCharacterMovement>().canDoubleJump = false;
+            GameObject.FindGameObjectWithTag("Player").GetComponent<EricCharacterMovement>().jumpParticle.SetActive(false);
         }
-
-        gameObject.GetComponent<MeshRenderer>().enabled = true;
-        gameObject.GetComponent<SphereCollider>().enabled = true;
-        GameObject.FindGameObjectWithTag("Player").GetComponent<EricCharacterMovement>().canDoubleJump = false;
-        GameObject.FindGameObjectWithTag("Player").GetComponent<EricCharacterMovement>().jumpParticle.SetActive(false);
-        Active = false;
+        else if (SpeedBoost)
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<EricCharacterMovement>().playerSpeed = 4.0f;
+            GameObject.FindGameObjectWithTag("Player").GetComponent<EricCharacterMovement>().speedParticle.SetActive(false);
+        }
+        else if (HealthPowerUp)
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<EricCharacterMovement>().HealingParticle.SetActive(false);
+        }
     }
+
 }

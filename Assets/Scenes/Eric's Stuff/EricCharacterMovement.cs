@@ -10,6 +10,7 @@ public class EricCharacterMovement : MonoBehaviour
     public GameObject obj;
     public GameObject speedParticle;
     public GameObject jumpParticle;
+    public GameObject HealingParticle;
 
     public Transform cam;
 
