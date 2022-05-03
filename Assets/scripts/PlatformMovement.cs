@@ -17,6 +17,7 @@ public class PlatformMovement : MonoBehaviour
     public bool bounce;
 
     public bool moveBetweenPoints;
+    private bool canMove = true;
     private bool atEnd = false;
 
  
@@ -69,30 +70,51 @@ public class PlatformMovement : MonoBehaviour
 
         if (moveBetweenPoints)
         {
-            if (!atEnd)
+            if (canMove)
             {
-                float step = speed * Time.deltaTime;
-                this.transform.position = Vector3.MoveTowards(this.transform.position, end.position, step);
+                if (!atEnd)
+                {
+                    float step = speed * Time.deltaTime;
+                    this.transform.position = Vector3.MoveTowards(this.transform.position, end.position, step);
+                }
+
+                else if (atEnd)
+                {
+                    float step = speed * Time.deltaTime;
+                    this.transform.position = Vector3.MoveTowards(this.transform.position, start.position, step);
+                }
             }
 
-            else if (atEnd)
-            {
-                float step = speed * Time.deltaTime;
-                this.transform.position = Vector3.MoveTowards(this.transform.position, start.position, step);
-            }
 
             if (Vector3.Distance(this.transform.position, end.position) < 0.1f)
             {
                 atEnd = true;
+
+                if (canMove)
+                {
+                    canMove = false;
+                    StartCoroutine(pause());
+                }
             }
 
             else if (Vector3.Distance(this.transform.position, start.position) < 0.1f)
             {
                 atEnd = false;
+
+                if (canMove)
+                {
+                    canMove = false;
+                    StartCoroutine(pause());
+                }
             }
 
 
         }
+    }
 
+    IEnumerator pause()
+    {
+        yield return new WaitForSeconds(1.0f);
+        canMove = true;
     }
 }

@@ -41,7 +41,7 @@ public class EricsPowerUps : MonoBehaviour
             if (SpeedBoost && PowerUpActive)
             {
                 gameObject.GetComponent<MeshRenderer>().material = SpeedMaterial;
-                GameObject.FindGameObjectWithTag("Player").GetComponent<EricCharacterMovement>().playerSpeed = 12.0f;
+                GameObject.FindGameObjectWithTag("Player").GetComponent<EricCharacterMovement>().playerSpeed = 9.0f;
                 GameObject.FindGameObjectWithTag("Player").GetComponent<EricCharacterMovement>().speedParticle.SetActive(true);
                 StartCoroutine(PowerUpDuration(RespawnTimer));
             }
@@ -121,7 +121,7 @@ public class EricsPowerUps : MonoBehaviour
         }
         else if (SpeedBoost)
         {
-            GameObject.FindGameObjectWithTag("Player").GetComponent<EricCharacterMovement>().playerSpeed = 4.0f;
+            GameObject.FindGameObjectWithTag("Player").GetComponent<EricCharacterMovement>().playerSpeed = 3.0f;
             GameObject.FindGameObjectWithTag("Player").GetComponent<EricCharacterMovement>().speedParticle.SetActive(false);
         }
         else if (HealthPowerUp)
