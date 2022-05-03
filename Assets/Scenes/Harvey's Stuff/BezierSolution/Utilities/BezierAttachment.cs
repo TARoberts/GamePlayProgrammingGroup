@@ -222,7 +222,10 @@ namespace BezierSolution
         {
 			float forward = Input.GetAxis("Vertical");
 
-
+			if (m_normalizedT < 0)
+            {
+				m_normalizedT = 0;
+            }
             if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || (forward < 0))
             {
                 m_normalizedT -= 0.0005f;
