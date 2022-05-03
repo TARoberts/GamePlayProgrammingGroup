@@ -325,6 +325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  body: {fileID: 6508042305119795208}
   slime1: {fileID: 0}
   slime2: {fileID: 0}
   a_SlimePrefab: {fileID: 6508042305119795210}

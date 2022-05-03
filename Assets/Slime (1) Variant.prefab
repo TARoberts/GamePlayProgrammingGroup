@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &7147892551135135997
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4938143083701155842, guid: 173730a053cb2a040bc124f5cbd84bf4, type: 3}
+      propertyPath: m_Name
+      value: Slime (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4938143083701155842, guid: 173730a053cb2a040bc124f5cbd84bf4, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4938143083701155845, guid: 173730a053cb2a040bc124f5cbd84bf4, type: 3}
+      propertyPath: combat
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4938143083701155845, guid: 173730a053cb2a040bc124f5cbd84bf4, type: 3}
+      propertyPath: movementSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4938143083701155845, guid: 173730a053cb2a040bc124f5cbd84bf4, type: 3}
+      propertyPath: rotationSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4938143083701155846, guid: 173730a053cb2a040bc124f5cbd84bf4, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4938143083701155846, guid: 173730a053cb2a040bc124f5cbd84bf4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -13.788339
+      objectReference: {fileID: 0}
+    - target: {fileID: 4938143083701155846, guid: 173730a053cb2a040bc124f5cbd84bf4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 4938143083701155846, guid: 173730a053cb2a040bc124f5cbd84bf4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 22.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 4938143083701155846, guid: 173730a053cb2a040bc124f5cbd84bf4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4938143083701155846, guid: 173730a053cb2a040bc124f5cbd84bf4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4938143083701155846, guid: 173730a053cb2a040bc124f5cbd84bf4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4938143083701155846, guid: 173730a053cb2a040bc124f5cbd84bf4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4938143083701155846, guid: 173730a053cb2a040bc124f5cbd84bf4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4938143083701155846, guid: 173730a053cb2a040bc124f5cbd84bf4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4938143083701155846, guid: 173730a053cb2a040bc124f5cbd84bf4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4938143085215473415, guid: 173730a053cb2a040bc124f5cbd84bf4, type: 3}
+      propertyPath: brain
+      value: 
+      objectReference: {fileID: 2861374144578924792}
+    - target: {fileID: 4938143085215473415, guid: 173730a053cb2a040bc124f5cbd84bf4, type: 3}
+      propertyPath: playerAnimator
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 173730a053cb2a040bc124f5cbd84bf4, type: 3}
+--- !u!114 &2861374144578924792 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4938143083701155845, guid: 173730a053cb2a040bc124f5cbd84bf4, type: 3}
+  m_PrefabInstance: {fileID: 7147892551135135997}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4a551bcabfe84249a60fbaee877ac67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

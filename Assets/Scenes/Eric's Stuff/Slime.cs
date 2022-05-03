@@ -7,6 +7,7 @@ using UnityEngine;
 public class Slime : MonoBehaviour
 {
     public GameObject player;
+    [SerializeField] Rigidbody body;
     public Slime slime1;
     public Slime slime2;
     public Slime a_SlimePrefab;
@@ -133,8 +134,10 @@ public class Slime : MonoBehaviour
         
         if (knockback == true)
         {
-            gameObject.GetComponent<Rigidbody>().AddForce(new Vector3((transform.position.x - player.transform.position.x),
-                2.0f, (transform.position.z - player.transform.position.z)).normalized, ForceMode.Impulse);
+            //gameObject.GetComponent<Rigidbody>().AddForce(new Vector3((transform.position.x - player.transform.position.x),
+                //2.0f, (transform.position.z - player.transform.position.z)).normalized, ForceMode.Impulse);
+            Vector3 toOther = player.transform.position - transform.position;
+            body.AddForce(toOther.normalized * -8.0f, ForceMode.Impulse);
         }
     }
 
