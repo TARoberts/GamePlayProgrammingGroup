@@ -220,13 +220,16 @@ namespace BezierSolution
 
         private void Update()
         {
-            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S))
+			float forward = Input.GetAxis("Horizontal");
+
+
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || (forward < 0))
             {
-                m_normalizedT -= 0.0002f;
+                m_normalizedT -= 0.0005f;
             }
-            else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W))
+            else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W) || (forward > 0))
             {
-                m_normalizedT += 0.0002f;
+                m_normalizedT += 0.0005f;
             }
         }
 
