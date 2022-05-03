@@ -21,6 +21,7 @@ public class EricCharacterMovement : MonoBehaviour
     public bool armed = false;
     public bool canDoubleJump = false;
     private bool groundedPlayer;
+    private bool isDying= false;
 
     public float playerSpeed = 4.0f;
     public float jumpHeight = 4.0f;
@@ -91,7 +92,7 @@ public class EricCharacterMovement : MonoBehaviour
             // Jumping for the Player Character
             if (jump && groundedPlayer)
             {
-                playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+                playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
                 anim?.SetBool(hash.jumpBool, true);
                 anim?.SetBool(hash.fallingBool, true);
                 if (groundedPlayer)
@@ -103,7 +104,7 @@ public class EricCharacterMovement : MonoBehaviour
             }
             else if (jump && canDoubleJump && groundedPlayer == false)
             {
-                playerVelocity.y += Mathf.Sqrt(jumpHeight * -6.0f * gravityValue);
+                playerVelocity.y = Mathf.Sqrt(jumpHeight * -6.0f * gravityValue);
                 anim?.SetBool(hash.jumpBool, false);
                 anim?.SetBool(hash.rollBool, true);
                 anim?.SetBool(hash.fallingBool, true);
@@ -158,9 +159,15 @@ public class EricCharacterMovement : MonoBehaviour
 
         if (PlayerHP <= 0)
         {
-            anim?.SetBool(hash.deathBool, true);
-            StartCoroutine(Respawn());
-            PlayerHP = 20;
+            if (!isDying)
+            {
+                isDying = true;
+                anim?.SetBool(hash.deathBool, true);
+                this.GetComponent<CharacterController>().enabled = false;
+                StartCoroutine(Respawn());
+            }
+
+            
         }
     }
 
@@ -172,10 +179,11 @@ public class EricCharacterMovement : MonoBehaviour
         bool spawn = true;
         if (spawn == true)
         {
-            this.GetComponent<CharacterController>().enabled = false;
+            PlayerHP = 20;
             transform.position = SpawnPointObject.transform.position;
             this.GetComponent<CharacterController>().enabled = true;
         }
+        isDying = false;
         spawn = false;
     }
 }
