@@ -220,7 +220,7 @@ namespace BezierSolution
 
         private void Update()
         {
-			float forward = Input.GetAxis("Horizontal");
+			float forward = Input.GetAxis("Vertical");
 
 
             if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || (forward < 0))

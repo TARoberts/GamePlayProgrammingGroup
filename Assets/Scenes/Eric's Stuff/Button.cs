@@ -107,6 +107,7 @@ public class Button : MonoBehaviour
 
     IEnumerator CameraMovementAsync()
     {
+        player.GetComponent<EricCharacterMovement>().playerSpeed = 0;
         player.GetComponent<EricCharacterMovement>().enabled = false;
         playerCamera.enabled = false;
         buttonCamera.enabled = true;
@@ -115,6 +116,7 @@ public class Button : MonoBehaviour
 
         Debug.Log("I have delayed for 4 seconds");
         player.GetComponent<EricCharacterMovement>().enabled = true;
+        player.GetComponent<EricCharacterMovement>().playerSpeed = 3;
         playerCamera.enabled = true;
         buttonCamera.enabled = false;
         canAction = true;

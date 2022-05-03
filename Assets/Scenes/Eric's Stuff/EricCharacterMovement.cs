@@ -11,6 +11,7 @@ public class EricCharacterMovement : MonoBehaviour
     public GameObject speedParticle;
     public GameObject jumpParticle;
     public GameObject HealingParticle;
+    public GameObject SpawnPointObject;
 
     public Transform cam;
 
@@ -159,13 +160,22 @@ public class EricCharacterMovement : MonoBehaviour
         {
             anim?.SetBool(hash.deathBool, true);
             StartCoroutine(Respawn());
+            PlayerHP = 20;
         }
     }
 
     IEnumerator Respawn()
     {
         yield return new WaitForSeconds(respawnTimer);
-        PlayerHP = 20;
+        
         anim?.SetBool(hash.deathBool, false);
+        bool spawn = true;
+        if (spawn == true)
+        {
+            this.GetComponent<CharacterController>().enabled = false;
+            transform.position = SpawnPointObject.transform.position;
+            this.GetComponent<CharacterController>().enabled = true;
+        }
+        spawn = false;
     }
 }
